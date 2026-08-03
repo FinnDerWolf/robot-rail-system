@@ -12,7 +12,7 @@
     2. Show nodes and edges
     3. show robot modell (would be a huge upgrade)
     4. show interactivly which path is beeing taken when driving (upgrade)
-- Station click node
+- Station click node (DONE)
     1. Node is clicked in rviz
     2. What was clicked? Is it a station?
     3. if its a station, invoke the right command at the route server
