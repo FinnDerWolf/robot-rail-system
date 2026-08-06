@@ -1,0 +1,73 @@
+[0.150s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.150s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x789b056ef710>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x789b056ef740>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x789b056ef740>>)
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.244s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.244s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/experimental-brain/Desktop/robot-rail-system'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.296s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'robot_rail_system'
+[0.296s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.296s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.296s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.296s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.296s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_args' from command line to 'None'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_target' from command line to 'None'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_clean_cache' from command line to 'False'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_clean_first' from command line to 'False'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'cmake_force_configure' from command line to 'False'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'ament_cmake_args' from command line to 'None'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'catkin_cmake_args' from command line to 'None'
+[0.326s] Level 5:colcon.colcon_core.verb:set package 'robot_rail_system' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.326s] DEBUG:colcon.colcon_core.verb:Building package 'robot_rail_system' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system', 'merge_install': False, 'path': '/home/experimental-brain/Desktop/robot-rail-system', 'symlink_install': False, 'test_result_base': None}
+[0.326s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.329s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.329s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/experimental-brain/Desktop/robot-rail-system' with build type 'ament_cmake'
+[0.329s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/experimental-brain/Desktop/robot-rail-system'
+[0.332s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.332s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.347s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/experimental-brain/Desktop/robot-rail-system -DCMAKE_INSTALL_PREFIX=/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system
+[1.926s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/experimental-brain/Desktop/robot-rail-system -DCMAKE_INSTALL_PREFIX=/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system
+[1.928s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system -- -j16 -l16
+[1.991s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system -- -j16 -l16
+[2.013s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system
+[2.035s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system
+[2.036s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(robot_rail_system)
+[2.039s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system' for CMake module files
+[2.039s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system' for CMake config files
+[2.040s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/bin'
+[2.040s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/lib/pkgconfig/robot_rail_system.pc'
+[2.043s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/lib/python3.12/site-packages'
+[2.043s] Level 1:colcon.colcon_core.environment:checking '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/bin'
+[2.043s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/share/robot_rail_system/package.dsv'
+[2.044s] INFO:colcon.colcon_core.shell:Creating package script '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/share/robot_rail_system/package.sh'
+[2.045s] INFO:colcon.colcon_core.shell:Creating package script '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/share/robot_rail_system/package.bash'
+[2.046s] INFO:colcon.colcon_core.shell:Creating package script '/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/share/robot_rail_system/package.zsh'
+[2.047s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/experimental-brain/Desktop/robot-rail-system/install/robot_rail_system/share/colcon-core/packages/robot_rail_system)
+[2.057s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[2.057s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[2.058s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[2.058s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[2.069s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[2.069s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[2.069s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[2.105s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[2.106s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/experimental-brain/Desktop/robot-rail-system/install/local_setup.sh'
+[2.107s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/experimental-brain/Desktop/robot-rail-system/install/_local_setup_util_sh.py'
+[2.110s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/experimental-brain/Desktop/robot-rail-system/install/setup.sh'
+[2.112s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/experimental-brain/Desktop/robot-rail-system/install/local_setup.bash'
+[2.113s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/experimental-brain/Desktop/robot-rail-system/install/setup.bash'
+[2.115s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/experimental-brain/Desktop/robot-rail-system/install/local_setup.zsh'
+[2.115s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/experimental-brain/Desktop/robot-rail-system/install/setup.zsh'

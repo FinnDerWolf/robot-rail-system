@@ -24,7 +24,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY launch maps config
+  DIRECTORY src/robot-rail-system/launch maps config
   DESTINATION share/${PROJECT_NAME}
 )
 
