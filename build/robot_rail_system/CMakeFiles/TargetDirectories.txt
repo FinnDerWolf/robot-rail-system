@@ -1,9 +1,0 @@
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/uninstall.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/robot_rail_system_uninstall.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/test.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/edit_cache.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/rebuild_cache.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/list_install_components.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/install.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/install/local.dir
-/home/experimental-brain/Desktop/robot-rail-system/build/robot_rail_system/CMakeFiles/install/strip.dir
