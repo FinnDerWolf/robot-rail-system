@@ -7,6 +7,7 @@
     - vorbereiten und testen am Montag
     - Finn
 - Rviz Config
+    - Costmap anzeigen (Map server)
     - Vorher testbar
     - Finn
 - Station click finish implementation (launch file und testing)
