@@ -1,0 +1,47 @@
+route_server:
+  ros__parameters:
+    # --- Grundeinstellungen ---
+    base_frame: "base_link"
+    route_frame: "map"
+
+    # Pfad zu eurer fertigen GeoJSON-Graphdatei
+    graph_filepath: "/root/ros2_ws/src/robot-rail-system/config/graph.geojson"
+
+    # Dichte der ausgegebenen Pfadpunkte (nav_msgs/Path), falls ihr die
+    # Route zusätzlich als kontinuierlichen Pfad für den Controller braucht
+    path_density: 0.05
+
+    # --- Planung ---
+    max_iterations: 0        # 0 = unbegrenzt
+    max_planning_time: 2.0
+
+    # --- Ecken-Glättung an Kantenübergängen ---
+    smooth_corners: false
+    smoothing_radius: 1.0
+    smoothing_angle_threshold: 2.9
+
+    # --- Costmap (für Goal-Intent-Extraktion / Collision-Monitor-Operation) ---
+    costmap_topic: "global_costmap/costmap_raw"
+
+    # --- ComputeAndTrackRoute: Tracking-Parameter ---
+    tracker_update_rate: 50.0
+    aggregate_blocked_ids: false
+    boundary_radius_to_achieve_node: 1.0   # Toleranz an Start-/Zielknoten
+    radius_to_achieve_node: 1.0            # Toleranz an Zwischenknoten
+
+    # --- Plugins ---
+    # Beispiel-Edge-Scorer (nach Bedarf anpassen/erweitern)
+    edge_cost_functions: ["DistanceScorer"]
+    DistanceScorer:
+      plugin: "nav2_route::DistanceScorer"
+
+    # Keine Route Operations nötig (z.B. keine Tür-Öffnen-Aktion) -> Parameter
+    # bewusst weglassen, damit der interne Default (leere Liste) greift.
+    # WICHTIG: "operations: []" NICHT explizit setzen - ein leeres Array ohne
+    # Typangabe lässt den route_server beim Start abstürzen
+    # (rclcpp kann den Typ aus einer leeren YAML-Liste nicht ableiten).
+
+    # Parser für euer Graph-Format
+    graph_file_loader: "GeoJsonGraphFileLoader"
+    GeoJsonGraphFileLoader:
+      plugin: "nav2_route::GeoJsonGraphFileLoader"
