@@ -1,7 +1,11 @@
 # robot-rail-system
 
-ROS-2-Paket für eine topologische Navigation mit statischer Karte, Nav2 Route
-Server, visualisierten Graphknoten und anklickbaren Zielen in RViz.
+## TODOS
+1. Alles auf geoJson umstellen
+2. Lokale Costmap anzeigen
+3. Stationsnamen anzeigen
+4. Einige Knoten verschieben(in geoJason)
+5. mux?
 
 ## Voraussetzungen
 
