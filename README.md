@@ -197,9 +197,10 @@ rviz2 -d install/robot_rail_system/share/robot_rail_system/config/robot_rail_sys
 Die mitgelieferte Konfiguration enthält folgende Displays:
 
 - Map mit Topic `/map`
-- MarkerArray mit Topic `/node_markers`
+- optionales MarkerArray mit Topic `/node_markers` (standardmäßig deaktiviert,
+  da diese roten Marker nicht interaktiv sind)
 - MarkerArray mit Topic `/topology_graph_edges`
-- InteractiveMarkers mit Update Topic `/topology_markers/update`
+- InteractiveMarkers mit Namespace `/topology_markers`
 
 ## Interaktive Route testen
 
@@ -207,7 +208,7 @@ Nach dem Setzen der Initialpose:
 
 1. In der RViz-Toolbar das Werkzeug `Interact` auswählen.
 2. Auf einen beschrifteten grünen oder blauen Topologiemarker klicken.
-3. Im Terminal die Meldungen `Station geklickt`, `Sende ComputeRoute-Ziel` und
+3. Im Terminal die Meldungen `Station geklickt`, `Sende ComputeRoute` und
    anschließend `Route ... berechnet` prüfen.
 
 Die Click-Node bestimmt über `map -> base_link` den der aktuellen

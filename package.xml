@@ -16,9 +16,11 @@
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>nav2_amcl</exec_depend>
+  <exec_depend>nav2_controller</exec_depend>
   <exec_depend>nav2_lifecycle_manager</exec_depend>
   <exec_depend>nav2_map_server</exec_depend>
   <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>nav2_regulated_pure_pursuit_controller</exec_depend>
   <exec_depend>nav2_route</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
   <exec_depend>python3-yaml</exec_depend>

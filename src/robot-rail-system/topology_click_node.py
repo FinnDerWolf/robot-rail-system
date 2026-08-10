@@ -3,7 +3,7 @@
 from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import Point
 from interactive_markers.interactive_marker_server import InteractiveMarkerServer
-from nav2_msgs.action import ComputeRoute
+from nav2_msgs.action import ComputeRoute, FollowPath
 import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
@@ -65,6 +65,11 @@ class TopologyClickNode(Node):
 
         # Verbindet Klicks mit dem bereits laufenden Nav2 Route Server.
         self.route_client = ActionClient(self, ComputeRoute, '/compute_route')
+        self.follow_path_client = ActionClient(
+            self,
+            FollowPath,
+            '/follow_path',
+        )
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
@@ -99,6 +104,7 @@ class TopologyClickNode(Node):
             int_marker.pose.position.x = data['x']
             int_marker.pose.position.y = data['y']
             int_marker.pose.position.z = 0.15
+            int_marker.pose.orientation.w = 1.0
 
             control = InteractiveMarkerControl()
             control.always_visible = True
@@ -246,7 +252,7 @@ class TopologyClickNode(Node):
         )
 
     def _route_result(self, future, node_name: str):
-        """Loggt das Ergebnis der Routenberechnung."""
+        """Uebergibt eine erfolgreich berechnete Route an den Controller."""
         try:
             wrapped_result = future.result()
         except Exception as error:
@@ -272,6 +278,86 @@ class TopologyClickNode(Node):
             f'{len(result.path.poses)} Pfadpunkte, '
             f'Kosten {result.route.route_cost:.3f}'
         )
+
+        self._send_follow_path(node_name, result.path)
+
+    def _send_follow_path(self, node_name: str, path):
+        """Sendet den berechneten Pfad an den Nav2 Controller Server."""
+        if not path.poses:
+            self.get_logger().error(
+                f'Route nach {node_name} enthaelt keine Pfadpunkte.'
+            )
+            return
+
+        if not self.follow_path_client.server_is_ready():
+            self.get_logger().error(
+                'Controller Server /follow_path ist nicht verfuegbar.'
+            )
+            return
+
+        goal = FollowPath.Goal()
+        goal.path = path
+        goal.controller_id = 'FollowPath'
+        goal.goal_checker_id = 'goal_checker'
+        goal.progress_checker_id = 'progress_checker'
+
+        self.get_logger().info(
+            f'Sende FollowPath fuer {node_name} an den Controller Server.'
+        )
+        future = self.follow_path_client.send_goal_async(goal)
+        future.add_done_callback(
+            lambda response: self._follow_path_goal_response(
+                response,
+                node_name,
+            )
+        )
+
+    def _follow_path_goal_response(self, future, node_name: str):
+        """Verarbeitet, ob der Controller den Pfad angenommen hat."""
+        try:
+            goal_handle = future.result()
+        except Exception as error:
+            self.get_logger().error(
+                f'FollowPath-Anfrage fuer {node_name} fehlgeschlagen: {error}'
+            )
+            return
+
+        if not goal_handle.accepted:
+            self.get_logger().error(
+                f'Controller Server hat den Pfad nach {node_name} abgelehnt.'
+            )
+            return
+
+        self.get_logger().info(f'Roboter faehrt nach {node_name} ...')
+        result_future = goal_handle.get_result_async()
+        result_future.add_done_callback(
+            lambda result: self._follow_path_result(result, node_name)
+        )
+
+    def _follow_path_result(self, future, node_name: str):
+        """Loggt den Abschluss oder den Fehler der Pfadverfolgung."""
+        try:
+            wrapped_result = future.result()
+        except Exception as error:
+            self.get_logger().error(
+                f'Fahrt nach {node_name} fehlgeschlagen: {error}'
+            )
+            return
+
+        result = wrapped_result.result
+        if (
+            wrapped_result.status != GoalStatus.STATUS_SUCCEEDED
+            or result.error_code != FollowPath.Result.NONE
+        ):
+            self.get_logger().error(
+                f'Fahrt nach {node_name} nicht erfolgreich: '
+                f'Status {wrapped_result.status}, '
+                f'Fehlercode {result.error_code}, '
+                f'Meldung: {result.error_msg}'
+            )
+            return
+
+        self.get_logger().info(f'Ziel {node_name} erreicht.')
 
     # EDGES VISUALISIERUNG (KANTEN)
     def _publish_graph_edges(self):

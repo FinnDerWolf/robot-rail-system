@@ -13,6 +13,7 @@ def generate_launch_description():
 
     map_file = LaunchConfiguration('map')
     amcl_params_file = LaunchConfiguration('amcl_params_file')
+    controller_params_file = LaunchConfiguration('controller_params_file')
     graph_file = LaunchConfiguration('graph_file')
     publish_base_footprint_to_base_link = LaunchConfiguration(
         'publish_base_footprint_to_base_link'
@@ -44,6 +45,15 @@ def generate_launch_description():
             'amcl_params.yaml',
         ),
         description='Full path to the AMCL params file',
+    )
+    declare_controller_params_file = DeclareLaunchArgument(
+        'controller_params_file',
+        default_value=os.path.join(
+            package_share,
+            'config',
+            'controller_server_params.yaml',
+        ),
+        description='Full path to the controller_server params file',
     )
     declare_publish_odom_tf = DeclareLaunchArgument(
         'publish_odom_tf',
@@ -125,6 +135,17 @@ def generate_launch_description():
         ],
     )
 
+    controller_server = Node(
+        package='nav2_controller',
+        executable='controller_server',
+        name='controller_server',
+        output='screen',
+        parameters=[
+            controller_params_file,
+            {'use_sim_time': use_sim_time},
+        ],
+    )
+
     lifecycle_manager = Node(
         package='nav2_lifecycle_manager',
         executable='lifecycle_manager',
@@ -132,7 +153,12 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'autostart': True,
-            'node_names': ['map_server', 'amcl', 'route_server'],
+            'node_names': [
+                'map_server',
+                'amcl',
+                'route_server',
+                'controller_server',
+            ],
             'use_sim_time': use_sim_time,
         }],
     )
@@ -203,6 +229,7 @@ def generate_launch_description():
         declare_map,
         declare_graph_file,
         declare_amcl_params_file,
+        declare_controller_params_file,
         declare_publish_odom_tf,
         declare_publish_base_footprint_to_base_link,
         declare_publish_base_link_to_laser,
@@ -213,6 +240,7 @@ def generate_launch_description():
         map_server,
         amcl,
         route_server,
+        controller_server,
         lifecycle_manager,
         odom_to_tf,
         base_footprint_to_base_link,
