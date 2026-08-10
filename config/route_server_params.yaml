@@ -4,8 +4,8 @@ route_server:
     base_frame: "base_link"
     route_frame: "map"
 
-    # Pfad zu eurer fertigen GeoJSON-Graphdatei
-    graph_filepath: "/root/ros2_ws/src/robot-rail-system/config/graph.geojson"
+    # Wird von den Launch-Dateien portabel aus dem installierten Paket gesetzt.
+    graph_filepath: ""
 
     # Dichte der ausgegebenen Pfadpunkte (nav_msgs/Path), falls ihr die
     # Route zusätzlich als kontinuierlichen Pfad für den Controller braucht

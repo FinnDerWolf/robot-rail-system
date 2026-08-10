@@ -8,18 +8,29 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    package_share = get_package_share_directory('robot_rail_system')
     params_file = LaunchConfiguration('params_file')
+    graph_file = LaunchConfiguration('graph_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     declare_params_file = DeclareLaunchArgument(
         'params_file',
         default_value=os.path.join(
-            get_package_share_directory('robot_rail_system'),
+            package_share,
             'config',
             'route_server_params.yaml',
         ),
-        description='Full path to the route_server params file '
-                     '(graph_filepath is set inside this yaml)',
+        description='Full path to the route_server params file',
+    )
+
+    declare_graph_file = DeclareLaunchArgument(
+        'graph_file',
+        default_value=os.path.join(
+            package_share,
+            'config',
+            'graph.geojson',
+        ),
+        description='Full path to the Nav2 route graph',
     )
 
     declare_use_sim_time = DeclareLaunchArgument(
@@ -37,7 +48,10 @@ def generate_launch_description():
         output='screen',
         parameters=[
             params_file,
-            {'use_sim_time': use_sim_time},
+            {
+                'graph_filepath': graph_file,
+                'use_sim_time': use_sim_time,
+            },
         ],
     )
 
@@ -55,6 +69,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_params_file,
+        declare_graph_file,
         declare_use_sim_time,
         route_server_node,
         lifecycle_manager_node,
