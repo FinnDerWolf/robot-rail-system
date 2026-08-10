@@ -30,9 +30,10 @@ install(
 
 install(
   PROGRAMS
+    scripts/odom_to_tf.py
     scripts/show_nodes.py
+    src/robot-rail-system/topology_click_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()
-
