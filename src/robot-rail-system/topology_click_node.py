@@ -25,9 +25,9 @@ from visualization_msgs.msg import (
 
 # GEOJSON Path
 GEOJSON_PATH = os.path.join(
-    get_package_share_directory("robot-rail-system"),
+    get_package_share_directory("robot_rail_system"),
     "config",
-    "topology.geojson",
+    "new_graph.geojson",
 )
 
 # Laedt die GEOJSON
@@ -225,95 +225,95 @@ class TopologyClickNode(Node):
         )
 
     # Interaktive Marker
-def _create_station_markers(self):
+    def _create_station_markers(self):
+    
+        # Erstellt für jede Node einen Marker
+        for node_name, data in self.nodes_data.items():
+    
+            int_marker = InteractiveMarker()
+    
+            int_marker.header.frame_id = "map"
+            int_marker.name = node_name
+    
+            door_label = "[Tuer]" if data["is_door"] else ""
+    
+            int_marker.description = (
+                f"{node_name} {door_label}"
+            )
+    
+            # Position des Interactive Markers
+            int_marker.pose.position.x = data["x"]
+            int_marker.pose.position.y = data["y"]
+            int_marker.pose.position.z = 0.15
+    
+            int_marker.pose.orientation.w = 1.0
+    
+            # Control
+            control = InteractiveMarkerControl()
+    
+            control.always_visible = True
+            control.interaction_mode = (
+                InteractiveMarkerControl.BUTTON
+            )
+    
+            # Node Zylinder
+            node_marker = Marker()
+    
+            node_marker.type = Marker.CYLINDER
+    
+            node_marker.scale.x = 0.35
+            node_marker.scale.y = 0.35
+            node_marker.scale.z = 0.15
+    
+            # Türen = Blau
+            # normale Nodes = Grün
+    
+            if data["is_door"]:
+                node_marker.color.r = 0.2
+                node_marker.color.g = 0.5
+                node_marker.color.b = 1.0
+            else:
+                node_marker.color.r = 0.1
+                node_marker.color.g = 0.8
+                node_marker.color.b = 0.2
+    
+            node_marker.color.a = 0.9
+    
+            control.markers.append(node_marker)
+    
+            # Node Name
+            name_marker = Marker()
+    
+            name_marker.type = Marker.TEXT_VIEW_FACING
+    
+            # Text über dem Knoten
+            name_marker.pose.position.x = 0.0
+            name_marker.pose.position.y = 0.0
+            name_marker.pose.position.z = 0.35
+    
+            # Name des Nodes
+            name_marker.text = node_name
+    
+            # Schriftgröße
+            name_marker.scale.z = 0.30
+    
+            # Schwarze Schrift
+            name_marker.color.r = 0.0
+            name_marker.color.g = 0.0
+            name_marker.color.b = 0.0
+            name_marker.color.a = 1.0
+    
+            control.markers.append(name_marker)
+    
+            # Registrieren der Marker
+            int_marker.controls.append(control)
+    
+            self.server.insert(
+                int_marker,
+                feedback_callback=self._on_marker_click,
+            )
 
-    # Erstellt für jede Node einen Marker
-    for node_name, data in self.nodes_data.items():
-
-        int_marker = InteractiveMarker()
-
-        int_marker.header.frame_id = "map"
-        int_marker.name = node_name
-
-        door_label = "[Tuer]" if data["is_door"] else ""
-
-        int_marker.description = (
-            f"{node_name} {door_label}"
-        )
-
-        # Position des Interactive Markers
-        int_marker.pose.position.x = data["x"]
-        int_marker.pose.position.y = data["y"]
-        int_marker.pose.position.z = 0.15
-
-        int_marker.pose.orientation.w = 1.0
-
-        # Control
-        control = InteractiveMarkerControl()
-
-        control.always_visible = True
-        control.interaction_mode = (
-            InteractiveMarkerControl.BUTTON
-        )
-
-        # Node Zylinder
-        node_marker = Marker()
-
-        node_marker.type = Marker.CYLINDER
-
-        node_marker.scale.x = 0.35
-        node_marker.scale.y = 0.35
-        node_marker.scale.z = 0.15
-
-        # Türen = Blau
-        # normale Nodes = Grün
-
-        if data["is_door"]:
-            node_marker.color.r = 0.2
-            node_marker.color.g = 0.5
-            node_marker.color.b = 1.0
-        else:
-            node_marker.color.r = 0.1
-            node_marker.color.g = 0.8
-            node_marker.color.b = 0.2
-
-        node_marker.color.a = 0.9
-
-        control.markers.append(node_marker)
-
-        # Node Name
-        name_marker = Marker()
-
-        name_marker.type = Marker.TEXT_VIEW_FACING
-
-        # Text über dem Knoten
-        name_marker.pose.position.x = 0.0
-        name_marker.pose.position.y = 0.0
-        name_marker.pose.position.z = 0.35
-
-        # Name des Nodes
-        name_marker.text = node_name
-
-        # Schriftgröße
-        name_marker.scale.z = 0.30
-
-        # Schwarze Schrift
-        name_marker.color.r = 0.0
-        name_marker.color.g = 0.0
-        name_marker.color.b = 0.0
-        name_marker.color.a = 1.0
-
-        control.markers.append(name_marker)
-
-        # Registrieren der Marker
-        int_marker.controls.append(control)
-
-        self.server.insert(
-            int_marker,
-            feedback_callback=self._on_marker_click,
-        )
-
-    self.server.applyChanges()
+        self.server.applyChanges()
 
     # Click Handler
     def _on_marker_click(self, feedback):
