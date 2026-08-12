@@ -68,7 +68,7 @@ def generate_launch_description():
     declare_publish_base_link_to_laser = DeclareLaunchArgument(
         'publish_base_link_to_laser',
         default_value='true',
-        description='Publish base_link to laser if the robot does not',
+        description='Connect the SICK laser mount to base_link',
     )
     declare_route_params_file = DeclareLaunchArgument(
         'route_params_file',
@@ -186,17 +186,20 @@ def generate_launch_description():
         ],
     )
 
-    base_link_to_laser = Node(
+    base_link_to_laser_mount = Node(
         condition=IfCondition(publish_base_link_to_laser),
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='base_link_to_laser',
+        name='base_link_to_laser_mount',
         output='screen',
         arguments=[
-            '--x', '0', '--y', '0', '--z', '0.2',
+            # The SICK driver already publishes laser_mount_link -> laser with
+            # z=0.05595 m. This edge completes the intended total laser height
+            # of 0.2 m without assigning a second parent directly to laser.
+            '--x', '0', '--y', '0', '--z', '0.14405',
             '--roll', '0', '--pitch', '0', '--yaw', '0',
             '--frame-id', 'base_link',
-            '--child-frame-id', 'laser',
+            '--child-frame-id', 'laser_mount_link',
         ],
     )
 
@@ -244,7 +247,7 @@ def generate_launch_description():
         lifecycle_manager,
         odom_to_tf,
         base_footprint_to_base_link,
-        base_link_to_laser,
+        base_link_to_laser_mount,
         show_nodes,
         topology_click_node,
         rviz,

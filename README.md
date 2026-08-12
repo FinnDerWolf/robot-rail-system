@@ -120,7 +120,7 @@ als Pfeil mit Positionsunsicherheit auf der Karte sichtbar. Die vollständige
 TF-Kette ist:
 
 ```text
-map -> odom -> base_footprint -> base_link -> laser
+map -> odom -> base_footprint -> base_link -> laser_mount_link -> laser
 ```
 
 Sie kann so geprüft werden:
@@ -130,7 +130,9 @@ ros2 run tf2_ros tf2_echo map base_link
 ```
 
 Die Gesamt-Launch-Datei wandelt standardmäßig `/odom` in TF um und ergänzt
-`base_link -> laser`. Der vorhandene `robot_state_publisher` liefert bereits
+`base_link -> laser_mount_link`. Der SICK-Treiber liefert bereits
+`laser_mount_link -> laser`; dadurch hat `laser` genau einen Eltern-Frame. Der
+vorhandene `robot_state_publisher` liefert außerdem
 `base_footprint -> base_link` mit der korrekten Roboterhöhe; diese Kante wird
 daher standardmäßig nicht ein zweites Mal publiziert. Alle Hilfen sind einzeln
 schaltbar:
