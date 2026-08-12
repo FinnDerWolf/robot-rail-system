@@ -7,8 +7,8 @@ route_server:
     # Wird von den Launch-Dateien portabel aus dem installierten Paket gesetzt.
     graph_filepath: ""
 
-    # Dichte der ausgegebenen Pfadpunkte (nav_msgs/Path), falls ihr die
-    # Route zusätzlich als kontinuierlichen Pfad für den Controller braucht
+    # Dichte der ausgegebenen Pfadpunkte (nav_msgs/Path), falls  die
+    # Route zusätzlich einen kontinuierlichen Pfad für den Controller braucht
     path_density: 0.05
 
     # --- Planung ---
