@@ -10,7 +10,7 @@
 ## Voraussetzungen
 
 Das Projekt verwendet ROS 2 Jazzy und Nav2. Die benötigten ROS-Pakete können
-unter Ubuntu 24.04 einmalig so installiert werden:
+unter Ubuntu 24.04 so installiert werden:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
@@ -28,15 +28,13 @@ colcon build --symlink-install --packages-select robot_rail_system
 source install/setup.bash
 ```
 
-Nach Änderungen am Quellcode muss das Paket erneut gebaut und das Setup erneut
-geladen werden.
 
 ## Neues Terminal vorbereiten
 
 In jedem neuen Terminal müssen ROS 2 und dieser Workspace geladen werden:
 
 ```bash
-export ROS_DOMAIN_ID=3
+export ROS_DOMAIN_ID=ID
 source /opt/ros/jazzy/setup.bash
 cd <PFAD-ZUM-WORKSPACE>/robot-rail-system
 source install/setup.bash
