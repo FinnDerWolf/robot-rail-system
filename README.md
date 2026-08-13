@@ -1,9 +1,9 @@
 # robot-rail-system
 
 ## TODOS
-1. Alles auf geoJson umstellen
+1. Alles auf geoJson umstellen (DONE)
 2. Lokale Costmap anzeigen
-3. Stationsnamen anzeigen
+3. Stationsnamen anzeigen (DONE)
 4. Einige Knoten verschieben(in geoJason)
 5. mux?
 
