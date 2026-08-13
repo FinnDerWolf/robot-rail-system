@@ -24,8 +24,8 @@ NODES_DATA = {
     '105Mitte': {'id': 4, 'x': 2.993, 'y': 17.653, 'is_door': False},
     'Ende105': {'id': 5, 'x': 5.861, 'y': 17.653, 'is_door': False},
     'EinganLab': {'id': 6, 'x': 4.728, 'y': 8.286, 'is_door': True},
-    'FlurLab': {'id': 7, 'x': 4.959, 'y': 11.154, 'is_door': False},
-    'LabTuer': {'id': 8, 'x': 4.173, 'y': 7.43, 'is_door': False},
+    'FlurLab': {'id': 7, 'x': 5.3, 'y': 11.154, 'is_door': False},
+    'LabTuer': {'id': 8, 'x': 3.3, 'y': 7.85, 'is_door': False},
     'FlurMitte': {'id': 9, 'x': 9.03, 'y': 10.899, 'is_door': False},
     'Raum107': {'id': 10, 'x': 11.366, 'y': 12.31, 'is_door': False},
     'Raum109': {'id': 11, 'x': 11.181, 'y': 9.951, 'is_door': False},
@@ -130,6 +130,32 @@ class TopologyClickNode(Node):
             marker.color.a = 0.9
 
             control.markers.append(marker)
+
+            # Node Name
+            name_marker = Marker()
+
+            name_marker.type = Marker.TEXT_VIEW_FACING
+
+            # Text über dem Knoten
+            name_marker.pose.position.x = 0.0
+            name_marker.pose.position.y = 0.0
+            name_marker.pose.position.z = 0.35
+
+            # Name des Nodes
+            name_marker.text = node_id
+
+            # Schriftgröße
+            name_marker.scale.z = 0.30
+
+            # Schwarze Schrift
+            name_marker.color.r = 0.0
+            name_marker.color.g = 0.0
+            name_marker.color.b = 0.0
+            name_marker.color.a = 1.0
+
+            control.markers.append(name_marker)
+
+
             int_marker.controls.append(control)
 
             # In Server eintragen & Callback verknüpfen
@@ -138,7 +164,7 @@ class TopologyClickNode(Node):
                 feedback_callback=self._on_marker_click,
             )
 
-        self.server.applyChanges()
+            self.server.applyChanges()
 
     # EVENT HANDLER & ROUTE COMMAND
     def _on_marker_click(self, feedback):
